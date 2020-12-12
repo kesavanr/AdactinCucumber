@@ -3,6 +3,7 @@ package com.adactin.utilities;
 import org.openqa.selenium.WebDriver;
 
 import com.adactin.pom.BookAHotelPage;
+import com.adactin.pom.BookedItinerary;
 import com.adactin.pom.BookingConfirmed;
 import com.adactin.pom.LoginPage;
 import com.adactin.pom.SearchHotelPage;
@@ -16,6 +17,7 @@ public class PageObjectManager {
 	private SelectHotelPage sl;
 	private BookAHotelPage bh;
 	private BookingConfirmed bc;
+	private BookedItinerary bi;
 	
 	public PageObjectManager(WebDriver ldriver) {
 		this.driver = ldriver;
@@ -46,4 +48,12 @@ public class PageObjectManager {
 			bc = new BookingConfirmed(driver);
 		return bc;
 	}
+
+	public BookedItinerary getBi() {
+		if(bi == null)
+			bi = new BookedItinerary(driver);
+		return bi;
+	}
+	
+	
 }

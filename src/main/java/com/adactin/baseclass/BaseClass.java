@@ -3,6 +3,7 @@ package com.adactin.baseclass;
 import java.io.File;
 import java.io.IOException;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.Alert;
@@ -11,6 +12,7 @@ import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebDriverException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.ie.InternetExplorerDriver;
@@ -21,7 +23,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class BaseClass {
 	public static WebDriver driver;
-	static long timeOutInSecond = 20;
+	static long timeOutInSecond = 15;
 	public static WebDriver getBrowser(String browserName) {				
 		try {
 			if(browserName.equalsIgnoreCase("chrome")) {
@@ -40,12 +42,13 @@ public class BaseClass {
 				System.out.println("Invalid browser");
 			}
 			driver.manage().window().maximize();
-			//driver.manage().timeouts().implicitlyWait(6, TimeUnit.SECONDS);
+			//driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		return driver;
 	}
+	
 	public static void getURL(String url) {
 		try {
 			driver.get(url);
@@ -53,33 +56,120 @@ public class BaseClass {
 			e.printStackTrace();
 		}
 	}
-	public static void findInputElement(WebElement element, String value) {
+	
+	public static void navigateTo(String Url) {
+		driver.navigate().to(Url);
+	}
+	
+	public static void navigateBack() {
+		driver.navigate().back();
+	}
+	
+	public static void navigateForward() {
+		driver.navigate().forward();
+	}
+	
+	public static void refreshWebpage() {
+		driver.navigate().refresh();
+	}
+	
+	public static String getCurrentWebpageUrl() {
+		return driver.getCurrentUrl();
+	}
+	
+	public static String getWebpageTitle() {
+		return driver.getTitle();
+	}
+	
+	public static String getWebElementText(WebElement element) {
+		WebElement waitElement = waitElement(element);
+		return waitElement.getText();
+	}
+	
+	public static String getAttributeValue(WebElement element, String attributeName) {
+		WebElement waitElement = waitElement(element);
+		return waitElement.getAttribute(attributeName);
+	}
+	public static List<WebElement> getOptions(WebElement element) {
+		List<WebElement> options = null;
 		try {
-			waitElement(element);
-			element.clear();
-			element.sendKeys(value);
+			WebElement waitElement = waitElement(element);
+			Select select = new Select(waitElement);
+			options = select.getOptions();			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return options;
+	}
+	
+	public static List<WebElement> getAllSelectedOptions(WebElement element) {
+		List<WebElement> options = null;
+		try {
+			WebElement waitElement = waitElement(element);
+			Select select = new Select(waitElement);
+			options = select.getAllSelectedOptions();			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return options;
+	}
+	
+	private boolean isMultipleSelect(WebElement element) {
+		boolean multiple = false;
+		try {
+			WebElement waitElement = waitElement(element);
+			Select select = new Select(waitElement);
+			multiple = select.isMultiple();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return multiple;
+	}
+	 
+	public static WebElement getFirstSelectedOption(WebElement element) {
+		WebElement firstSelectedOption = null;
+		try {
+			WebElement waitElement = waitElement(element);
+			Select select = new Select(waitElement);
+			firstSelectedOption = select.getFirstSelectedOption();			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return firstSelectedOption;
+	}
+	
+	public static void findInputElement(WebElement element, String value) {
+		WebElement waitElement = waitElement(element);
+		try {			
+			waitElement.clear();
+			waitElement.sendKeys(value);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
 	public static void moveToElement(WebElement element) {
-		try {
-			waitElement(element);
+		WebElement waitElement = waitElement(element);
+		try {			
 			Actions actions = new Actions(driver);
-			actions.moveToElement(element).perform();
+			actions.moveToElement(waitElement).perform();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
 	public static void Click(WebElement element) {
-		WebElement elementToBeClickable = elementToBeClickable(element);
-		elementToBeClickable.click();
+		try {
+			WebElement elementToBeClickable = elementToBeClickable(element);
+			elementToBeClickable.click();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 	public static void clickOnElement(WebElement element) {
-		try {
-			waitElement(element);
+		WebElement waitElement = waitElement(element);
+		try {			
 			Actions actions = new Actions(driver);
-			actions.click(element).perform();
+			actions.click(waitElement).perform();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -93,11 +183,43 @@ public class BaseClass {
 			e.printStackTrace();
 		}
 	}
+	public static void scrollDown() {		
+		try {	
+			JavascriptExecutor js = (JavascriptExecutor) driver;
+			js.executeScript("window.scroll(0,1000);", "");
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	public static void scrollUp() {		
+		try {	
+			JavascriptExecutor js = (JavascriptExecutor) driver;
+			js.executeScript("window.scroll(0,-1000);", "");
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	public static void scrollTopOfPage() {		
+		try {	
+			JavascriptExecutor js = (JavascriptExecutor) driver;
+			js.executeScript("window.scroll(0,0);", "");
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	public static void scrollBottomOfPage() {		
+		try {	
+			JavascriptExecutor js = (JavascriptExecutor) driver;
+			js.executeScript("window.scroll(0,document.body.scrollHeight);", "");
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
 	public static void scrollIntoView(By locator) {		
 		try {	
 			WebElement element = presenceOfElementLocated(locator);
 			if(element.isEnabled()) {
-				System.out.println("element enabled");				
+				//System.out.println("element enabled");				
 				JavascriptExecutor js = (JavascriptExecutor) driver;
 				js.executeScript("arguments[0].scrollIntoView();", element);
 			}
@@ -106,28 +228,63 @@ public class BaseClass {
 		}
 	}
 	public static WebElement waitElement(WebElement element) {
-		WebDriverWait wt = new WebDriverWait(driver, timeOutInSecond);
-		return wt.until(ExpectedConditions.visibilityOf(element));
-	}	
+		WebElement returnElement = null;
+		try {
+			WebDriverWait wt = new WebDriverWait(driver, timeOutInSecond);
+			returnElement = wt.until(ExpectedConditions.visibilityOf(element));
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}		
+		return returnElement;
+	}
 	public static WebElement elementToBeClickable(WebElement element) {
-		WebDriverWait wt = new WebDriverWait(driver, timeOutInSecond);
-		return wt.until(ExpectedConditions.elementToBeClickable(element));
+		WebElement returnElement = null;
+		try {
+			WebDriverWait wt = new WebDriverWait(driver, timeOutInSecond);
+			returnElement = wt.until(ExpectedConditions.elementToBeClickable(element));
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return returnElement;
 	}
 	public static WebElement presenceOfElementLocated(By locator) {
-		WebDriverWait wt = new WebDriverWait(driver, timeOutInSecond);
-		return wt.until(ExpectedConditions.presenceOfElementLocated(locator));
+		WebElement returnElement = null;
+		try {
+			WebDriverWait wt = new WebDriverWait(driver, timeOutInSecond);
+			returnElement = wt.until(ExpectedConditions.presenceOfElementLocated(locator));
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return returnElement;
 	}
 	/*public static List<WebElement> presenceOfAllElementsLocatedBy(By locator) {
 		WebDriverWait wt = new WebDriverWait(driver, timeOutInSecond);
 		return wt.until(ExpectedConditions.presenceOfAllElementsLocatedBy(locator));
 	}*/
 	public static WebElement visibilityOfElementLocated(By locator) {
-		WebDriverWait wt = new WebDriverWait(driver, timeOutInSecond);
-		return wt.until(ExpectedConditions.visibilityOfElementLocated(locator));
+		WebElement returnElement = null;
+		try {
+			WebDriverWait wt = new WebDriverWait(driver, timeOutInSecond);
+			returnElement = wt.until(ExpectedConditions.visibilityOfElementLocated(locator));
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return returnElement;
 	}
 	public static List<WebElement> presenceOfAllElementsLocatedBy(List<WebElement> list) {
-		WebDriverWait wt = new WebDriverWait(driver, timeOutInSecond);
-		return wt.until(ExpectedConditions.visibilityOfAllElements(list));
+		List<WebElement> returnElement = null;
+		try {
+			WebDriverWait wt = new WebDriverWait(driver, timeOutInSecond);
+			return wt.until(ExpectedConditions.visibilityOfAllElements(list));
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return returnElement;
 	}
 	public static void switchToFrameUsingId(String option, int index) {
 		try {
@@ -138,11 +295,42 @@ public class BaseClass {
 			e.printStackTrace();
 		}
 	}
-	public static boolean isDisplayed(WebElement element) {
-		WebElement waitElement = waitElement(element);
-		return waitElement.isDisplayed();
+	public static boolean isDisplayedStatus(WebElement element) {
+		WebElement waitElement;
+		try {
+			waitElement = waitElement(element);
+			return waitElement.isDisplayed();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return false;
 	}
-
+	
+	public static boolean isEnabledStatus(WebElement element) {
+		WebElement waitElement;
+		try {
+			waitElement = waitElement(element);
+			return waitElement.isEnabled();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return false;
+	}
+	
+	public static boolean isSelectedStatus(WebElement element) {
+		WebElement waitElement;
+		try {
+			waitElement = waitElement(element);
+			return waitElement.isSelected();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return false;
+	}
+	
 	public static WebDriver switchToFrame(WebElement element) {
 		try {			
 			driver = waitFrameElement(element);
@@ -151,6 +339,7 @@ public class BaseClass {
 		}
 		return driver;
 	}
+	
 	public static void selectDropDown(By locator, String value, String options) {
 		try {
 			WebElement element = presenceOfElementLocated(locator);			
@@ -176,6 +365,7 @@ public class BaseClass {
 			System.out.println("===========Error in selectDropDown END===========");
 		}
 	}	
+	
 	public static WebDriver defaultContent() {
 		try {
 			driver.switchTo().defaultContent();
@@ -185,6 +375,7 @@ public class BaseClass {
 
 		return driver;
 	}
+	
 	public static void quitBrowser() {
 		try {
 			driver.quit();
@@ -192,6 +383,7 @@ public class BaseClass {
 			e.printStackTrace();
 		}
 	}
+	
 	public static void closeBrowser() {
 		try {
 			driver.close();
@@ -199,12 +391,20 @@ public class BaseClass {
 			e.printStackTrace();
 		}
 	}
+	
 	public static WebDriver waitFrameElement(WebElement element) {
-		WebDriverWait wt = new WebDriverWait(driver, timeOutInSecond);
-		WebDriver driver1 = wt.until(ExpectedConditions.frameToBeAvailableAndSwitchToIt(element));
+		WebDriver driver1 = null;
+		try {
+			WebDriverWait wt = new WebDriverWait(driver, timeOutInSecond);
+			driver1 = wt.until(ExpectedConditions.frameToBeAvailableAndSwitchToIt(element));
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 
 		return driver1;
 	}
+	
 	public static Alert SwitchToAlert() {
 		WebDriverWait wt = new WebDriverWait(driver, timeOutInSecond);
 		wt.until(ExpectedConditions.alertIsPresent());
@@ -213,10 +413,21 @@ public class BaseClass {
 	}
 	
 	public void getScreenshot(String filename) throws IOException {
-		TakesScreenshot ts = (TakesScreenshot) driver;
-		File srcFile = ts.getScreenshotAs(OutputType.FILE);
-		String filePath = System.getProperty("user.dir") +"\\Screenshot\\" + filename + ".png";
-		File destFile = new File(filePath);
-		FileUtils.copyFile(srcFile, destFile);
+		try {
+			TakesScreenshot ts = (TakesScreenshot) driver;
+			File srcFile = ts.getScreenshotAs(OutputType.FILE);
+			String filePath = System.getProperty("user.dir") +"\\Screenshot\\" + filename + ".png";
+			File destFile = new File(filePath);
+			FileUtils.copyFile(srcFile, destFile);
+		} catch (WebDriverException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		catch (IOException e) {
+			e.printStackTrace();
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 }

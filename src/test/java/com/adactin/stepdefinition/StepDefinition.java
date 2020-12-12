@@ -103,11 +103,12 @@ public class StepDefinition extends BaseClass{
 	}
 
 	@Then("^User verifies whether navigated to search hotel page$")
-	public void user_verifies_whether_navigated_to_search_hotel_page() throws Throwable {
-		String actualTitle = driver.getTitle();
-		Assert.assertEquals("Adactin.com - Search Hotel11", actualTitle);
-		//testCase.pass("User verifies whether navigated to search hotel page");
-		System.out.println("Statement 1");
+	public void user_verifies_whether_navigated_to_search_hotel_page() throws Throwable {		
+		//Assert.assertEquals(true, false);
+		
+		boolean displayed = isDisplayedStatus(pom.getSh().getSearch_form());
+		Assert.assertEquals(true, displayed);
+		//testCase.pass("User verifies whether navigated to search hotel page");		
 	}
 	//----------------------------------------
 
@@ -167,14 +168,14 @@ public class StepDefinition extends BaseClass{
 	
 	@When("^User click the search button$")
 	public void user_click_the_search_button() throws Throwable {
-		clickOnElement(pom.getSh().getSubmit());
+		Click(pom.getSh().getSubmit());
 		//testCase.pass("User click the search button");
 	}
 
 	@Then("^User verifies whether navigated to select hotel page$")
 	public void user_verifies_whether_navigated_to_select_hotel_page() throws Throwable {
-		String actualTitle = driver.getTitle();
-		Assert.assertEquals("Adactin.com - Select Hotel", actualTitle);
+		boolean displayed = isDisplayedStatus(pom.getSl().getSelect_form());
+		Assert.assertEquals(true, displayed);
 		//testCase.pass("User verifies whether navigated to select hotel page");
 	}
 	//----------------------------------------
@@ -194,8 +195,8 @@ public class StepDefinition extends BaseClass{
 
 	@Then("^User verifies whether navigated to book a hotel page$")
 	public void user_verifies_whether_navigated_to_book_a_hotel_page() throws Throwable {
-		String actualTitle = driver.getTitle();
-		Assert.assertEquals("Adactin.com - Book A Hotel11", actualTitle);
+		boolean displayed = isDisplayedStatus(pom.getBh().getBook_hotel_form());
+		Assert.assertEquals(true, displayed);
 		//testCase.pass("User verifies whether navigated to book a hotel page");
 	}
 	//----------------------------------------
@@ -252,13 +253,13 @@ public class StepDefinition extends BaseClass{
 	public void user_click_the_book_now_button() throws Throwable {
 		Click(pom.getBh().getBook_now());
 		//testCase.pass("User click the book now button");
-		Thread.sleep(6000);
+		//Thread.sleep(6000);
 	}	
 
 	@Then("^User verifies whether navigated to booking confirmation page$")
 	public void user_verifies_whether_navigated_to_booking_confirmation_page() throws Throwable {
-		String actualTitle = driver.getTitle();
-		Assert.assertEquals("Adactin.com - Hotel Booking Confirmation", actualTitle);
+		boolean displayed = isDisplayedStatus(pom.getBc().getBooking_form());
+		Assert.assertEquals(true, displayed);
 		//testCase.pass("User verifies whether navigated to booking confirmation page");
 	}
 	//----------------------------------------
@@ -272,8 +273,8 @@ public class StepDefinition extends BaseClass{
 
 	@Then("^User verifies whether navigated to booked itinerary page$")
 	public void user_verifies_whether_navigated_to_booked_itinerary_page() throws Throwable {
-		String actualUrl = driver.getCurrentUrl();
-		Assert.assertEquals("http://adactinhotelapp.com/BookedItinerary.php", actualUrl);
+		boolean displayed = isDisplayedStatus(pom.getBi().getBooked_form());
+		Assert.assertEquals(true, displayed);
 		//testCase.pass("User verifies whether navigated to booked itinerary page");
 	}
 	//----------------------------------------

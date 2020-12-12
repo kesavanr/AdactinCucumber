@@ -21,9 +21,10 @@ import cucumber.api.junit.Cucumber;
 					, strict=true
 					, plugin= {/*"pretty", "html:ReportFolder/CucumberReportHtml",
 							"json:ReportFolder/CucumberReport.json",*/
-							"com.vimalselvam.cucumber.listener.ExtentCucumberFormatter:ReportFolder/CucumberExtentReport.html"
+							"com.vimalselvam.cucumber.listener.ExtentCucumberFormatter:ReportFolder/CucumberExtentReport.html",
+							"rerun:ReportFolder/FailedScenario.txt"
 							}
-					, tags = { "~@BookHotel", "~@BookedHistory" }
+					//, tags = { "~@BookHotel", "~@BookedHistory" }
 				)
 public class TestRunner {
 	

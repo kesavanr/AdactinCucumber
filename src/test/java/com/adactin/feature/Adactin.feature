@@ -1,5 +1,5 @@
 @AdactinHotel
-Feature: Booking functionality of the adaction hotel
+Feature: Booking functionality of the adaction hotel application
 	@LoginHotel
   Scenario Outline: Adactin hotel login scenario
     Given :Launch the application url

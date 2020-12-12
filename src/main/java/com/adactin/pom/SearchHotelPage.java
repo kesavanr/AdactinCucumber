@@ -14,9 +14,12 @@ public class SearchHotelPage {
 		PageFactory.initElements(driver, this);
 	}
 	
+	@FindBy(id="search_form")
+	private WebElement search_form;
+	
 	@FindBy(id="location")
 	private WebElement location;
-	
+		
 	@FindBy(id="hotels")
 	private WebElement hotels;
 	
@@ -40,6 +43,10 @@ public class SearchHotelPage {
 	
 	@FindBy(id="Submit")
 	private WebElement Submit;
+	
+	public WebElement getSearch_form() {
+		return search_form;
+	}
 	
 	public WebElement getLocation() {
 		return location;

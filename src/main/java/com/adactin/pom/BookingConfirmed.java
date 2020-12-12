@@ -13,8 +13,15 @@ public class BookingConfirmed {
 		PageFactory.initElements(driver, this);
 	}
 	
+	@FindBy(id="booking_form")
+	private WebElement booking_form;
+	
 	@FindBy(id="my_itinerary")
 	private WebElement myItinerary;
+
+	public WebElement getBooking_form() {
+		return booking_form;
+	}
 
 	public WebElement getMyItinerary() {
 		return myItinerary;

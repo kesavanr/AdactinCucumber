@@ -15,6 +15,9 @@ public class BookAHotelPage {
 		PageFactory.initElements(driver, this);
 	}
 	
+	@FindBy(id="book_hotel_form")
+	private WebElement book_hotel_form;
+	
 	@FindBy(id="first_name")
 	private WebElement first_name;
 	
@@ -41,6 +44,11 @@ public class BookAHotelPage {
 	
 	@FindBy(id="book_now")
 	private WebElement book_now;
+
+	
+	public WebElement getBook_hotel_form() {
+		return book_hotel_form;
+	}
 
 	public WebElement getFirst_name() {
 		return first_name;

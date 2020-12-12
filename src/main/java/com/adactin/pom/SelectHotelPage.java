@@ -17,11 +17,19 @@ public class SelectHotelPage {
 		PageFactory.initElements(driver, this);
 	}
 	
+	@FindBy(id="select_form")
+	private WebElement select_form;
+	
 	@FindBy(xpath="(//input[@type='radio'])[1]")
 	private WebElement selectHotel;
 	
 	@FindBy(id="continue")
 	private WebElement continueButton;
+
+	
+	public WebElement getSelect_form() {
+		return select_form;
+	}
 
 	public WebElement getSelectHotel() {
 		return selectHotel;
