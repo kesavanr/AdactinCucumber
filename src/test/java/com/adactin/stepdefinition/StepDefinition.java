@@ -64,6 +64,7 @@ public class StepDefinition extends BaseClass{
 	@Before("@LoginHotel")
 	public void beforeFirstScenario() {
 		System.out.println("@Before(\"@LoginHotel\")");
+		System.out.println("newbrach updated");
 	}
 	@After("@LoginHotel")
 	public void afterFirstScenario() {
