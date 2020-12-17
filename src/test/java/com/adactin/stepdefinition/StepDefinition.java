@@ -64,7 +64,7 @@ public class StepDefinition extends BaseClass{
 	@Before("@LoginHotel")
 	public void beforeFirstScenario() {
 		System.out.println("@Before(\"@LoginHotel\")");
-		System.out.println("master updated");
+		System.out.println("master and neewbranch is updated after conflit");		
 	}
 	@After("@LoginHotel")
 	public void afterFirstScenario() {
