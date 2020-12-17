@@ -64,6 +64,8 @@ public class StepDefinition extends BaseClass{
 	@Before("@LoginHotel")
 	public void beforeFirstScenario() {
 		System.out.println("@Before(\"@LoginHotel\")");
+		System.out.println("master side page updated1");
+		System.out.println("master side page updated2");
 	}
 	@After("@LoginHotel")
 	public void afterFirstScenario() {
