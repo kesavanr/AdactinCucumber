@@ -70,6 +70,8 @@ public class StepDefinition extends BaseClass{
 	@After("@LoginHotel")
 	public void afterFirstScenario() {
 		System.out.println("@After(\"@LoginHotel\")");
+		System.out.println("branch side page updated1");
+		System.out.println("branch side page updated2");
 	}
 	
 	@After("@SearchHotel")
