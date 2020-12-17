@@ -75,7 +75,7 @@ public class StepDefinition extends BaseClass{
 	@After("@SearchHotel")
 	public void afterSecondScenario() {
 		System.out.println("@After(\"@SearchHotel\")");
-		System.out.println("master search hotel update");
+		System.out.println("master nad branch search hotel updated after conflit");
 	}
 	@Given("^:Launch the application url$")
 	public void launch_the_application_url() throws Throwable {
