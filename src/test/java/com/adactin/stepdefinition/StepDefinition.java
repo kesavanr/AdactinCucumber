@@ -43,7 +43,7 @@ public class StepDefinition extends BaseClass{
 		System.out.println("@Before");
 		String name = scenario.getName();		
 		//System.out.println("Scenario Name : " + name);	
-		//testCase = exReports.createTest(name);
+		//testCase = exReports.createTest(name);		
 	}
 	
 	@After
