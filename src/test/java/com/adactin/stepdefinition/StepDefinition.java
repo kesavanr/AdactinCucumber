@@ -64,7 +64,7 @@ public class StepDefinition extends BaseClass{
 	@Before("@LoginHotel")
 	public void beforeFirstScenario() {
 		System.out.println("@Before(\"@LoginHotel\")");
-		System.out.println("newbrach updated");
+		System.out.println("master and neewbranch is updated after conflit");		
 	}
 	@After("@LoginHotel")
 	public void afterFirstScenario() {
@@ -75,7 +75,7 @@ public class StepDefinition extends BaseClass{
 	@After("@SearchHotel")
 	public void afterSecondScenario() {
 		System.out.println("@After(\"@SearchHotel\")");
-		System.out.println("newbranch search hotel update");
+		System.out.println("master nad branch search hotel updated after conflit");
 	}
 	@Given("^:Launch the application url$")
 	public void launch_the_application_url() throws Throwable {
