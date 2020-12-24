@@ -1,0 +1,7 @@
+com\adactin\baseclass\BaseClass.class
+com\adactin\pom\LoginPage.class
+com\adactin\pom\BookingConfirmed.class
+com\adactin\pom\SearchHotelPage.class
+com\adactin\pom\BookAHotelPage.class
+com\adactin\pom\BookedItinerary.class
+com\adactin\pom\SelectHotelPage.class
