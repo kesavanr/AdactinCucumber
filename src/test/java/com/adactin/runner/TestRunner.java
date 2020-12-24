@@ -19,8 +19,8 @@ import cucumber.api.junit.Cucumber;
 					, monochrome=true
 					, dryRun=false
 					, strict=true
-					, plugin= {/*"pretty", "html:ReportFolder/CucumberReportHtml",
-							"json:ReportFolder/CucumberReport.json",*/
+					, plugin= {"pretty", "html:ReportFolder/CucumberReportHtml",
+							"json:ReportFolder/CucumberReport.json",
 							"com.vimalselvam.cucumber.listener.ExtentCucumberFormatter:ReportFolder/CucumberExtentReport.html",
 							"rerun:ReportFolder/FailedScenario.txt"
 							}
