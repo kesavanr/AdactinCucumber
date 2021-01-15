@@ -27,10 +27,12 @@ public class ConfigurationReader {
 		//System.out.println("Url : " + url);
 		return url;
 	}
-	
 	/*public static void main(String[] args) throws IOException {
 		ConfigurationReader cr= new ConfigurationReader();
-		cr.getBrowserName();
-		cr.getUrl();
+		String browserName = cr.getBrowserName();
+		System.out.println("BrowserName : " + browserName);
+		
+		String url = cr.getUrl();
+		System.out.println("Url : " + url);
 	}*/
 }

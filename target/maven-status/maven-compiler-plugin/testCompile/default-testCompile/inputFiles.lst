@@ -1,6 +1,15 @@
+<<<<<<< HEAD
 D:\TG\AdactinCucumber\src\test\java\com\adactin\utilities\PageObjectManager.java
 D:\TG\AdactinCucumber\src\test\java\com\adactin\utilities\FileReaderManager.java
 D:\TG\AdactinCucumber\src\test\java\com\adactin\runner\TestRunner.java
 D:\TG\AdactinCucumber\src\test\java\com\adactin\utilities\ConfigurationReader.java
 D:\TG\AdactinCucumber\src\test\java\com\adactin\runner\TestRunnerRerun.java
 D:\TG\AdactinCucumber\src\test\java\com\adactin\stepdefinition\StepDefinition.java
+=======
+C:\Users\sys-033\eclipse-workspace\AdactinCucumber\src\test\java\com\adactin\utilities\ConfigurationReader.java
+C:\Users\sys-033\eclipse-workspace\AdactinCucumber\src\test\java\com\adactin\utilities\PageObjectManager.java
+C:\Users\sys-033\eclipse-workspace\AdactinCucumber\src\test\java\com\adactin\runner\TestRunnerRerun.java
+C:\Users\sys-033\eclipse-workspace\AdactinCucumber\src\test\java\com\adactin\stepdefinition\StepDefinition.java
+C:\Users\sys-033\eclipse-workspace\AdactinCucumber\src\test\java\com\adactin\runner\TestRunner.java
+C:\Users\sys-033\eclipse-workspace\AdactinCucumber\src\test\java\com\adactin\utilities\FileReaderManager.java
+>>>>>>> 4026eeded1c03c916e965c4e7f7d7f72f0350529
